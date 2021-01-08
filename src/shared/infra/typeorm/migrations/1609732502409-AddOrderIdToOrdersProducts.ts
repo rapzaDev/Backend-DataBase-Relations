@@ -20,21 +20,17 @@ export default class AddOrderIdToOrdersProducts1609732502409
     await queryRunner.createForeignKey(
       'orders_products',
       new TableForeignKey({
-        name: 'orders_products_Order',
+        name: 'OrdersProductsOrder',
         columnNames: ['order_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'orders',
         onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey(
-      'orders_products',
-      'orders_products_Order',
-    );
+    await queryRunner.dropForeignKey('orders_products', 'OrdersProductsOrder');
 
     await queryRunner.dropColumn('orders_products', 'order_id');
   }
